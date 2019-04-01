@@ -48,6 +48,8 @@ function preload() {
     });
     1
   });
+
+  mobileConsole.show();
 }
 
 function setup() {
