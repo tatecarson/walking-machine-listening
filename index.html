@@ -20,7 +20,17 @@
 
   <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
   <script>
-    UnmuteButton()
+    UnmuteButton({
+      //the parent element of the mute button
+      //can pass in "none" to create the element, but not add it to the DOM
+      container: document.querySelector('#container'),
+      //the title which appears on the iOS lock screen
+      title: 'Web Audio',
+      //force it to start muted, even when the AudioContext is running
+      mute: false,
+      //AudioContext
+      context: new AudioContext(),
+    })
   </script>
 
   <style>
