@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>p5js_simpleWebcam_100Inputs</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/B1naryStudio/js-mobile-console/style/mobile-console.min.css">
-  <script src="https://unpkg.com/unmute" data-add-button="true"></script>
+  <script src="https://unpkg.com/startaudiocontext"></script>
 
   <script src="libraries/p5.js" type="text/javascript"></script>
 
@@ -20,17 +20,7 @@
 
   <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
   <script>
-    UnmuteButton({
-      //the parent element of the mute button
-      //can pass in "none" to create the element, but not add it to the DOM
-      container: document.querySelector('#container'),
-      //the title which appears on the iOS lock screen
-      title: 'Web Audio',
-      //force it to start muted, even when the AudioContext is running
-      mute: false,
-      //AudioContext
-      context: new AudioContext(),
-    })
+
   </script>
 
   <style>
@@ -48,10 +38,15 @@
 <body>
   <!-- <button onclick="traffic.start()">Train Traffic</button>
     <button onclick="birds.start()">Train Birds</button> -->
-  <p>
+  <div id="container">
+    <p>
 
-    <button onclick="saveData()">Save Data</button>
-  </p>
+      <button onclick="saveData()">Save Data</button>
+    </p>
+
+  </div>
+
+
   <script src="https://unpkg.com/js-mobile-console@0.4.0/mobile-console.js"></script>
 
 </body>
