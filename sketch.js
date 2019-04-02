@@ -33,11 +33,11 @@ var trainingSpeed;
 function preload() {
   // load firebase
   fb();
-  mobileConsole.show();
+  // mobileConsole.show();
 }
 
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(deviceWidth, 480);
   audio = new MicrophoneInput(512);
   startTime = millis();
 
