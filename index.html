@@ -3,14 +3,17 @@
 
 <head>
   <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
   <title>p5js_simpleWebcam_100Inputs</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/B1naryStudio/js-mobile-console/style/mobile-console.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
   <script src="https://unpkg.com/startaudiocontext"></script>
 
   <script src="libraries/p5.js" type="text/javascript"></script>
 
   <script src="libraries/p5.dom.js" type="text/javascript"></script>
-  <!-- <script src="libraries/p5.sound.js" type="text/javascript"></script> -->
   <script src="libraries/knn.js" type="text/javascript"></script>
   <script src="libraries/Audio.js" type="text/javascript"></script>
   <script src="libraries/meyda.min.js" type="text/javascript"></script>
@@ -27,33 +30,27 @@
 
   </script>
 
-  <style>
-    body {
-      padding: 0;
-      margin: 0;
-    }
-
-    canvas {
-      vertical-align: top;
-    }
-  </style>
 </head>
 
 <body>
-  <!-- <button onclick="traffic.start()">Train Traffic</button>
-    <button onclick="birds.start()">Train Birds</button> -->
-  <div id="container">
-    <p>
+  <section class="section">
+    <div class="container">
+      <div id="container">
+        <p>
 
-      <button onclick="saveData()">Save Data</button>
-    </p>
+          <button onclick="saveData()">Save Data</button>
+        </p>
 
-    <div id="select"></div>
-    <p>
-      Loudness threshold
-    </p>
-    <div id="threshold"></div>
-  </div>
+        <div id="select"></div>
+        <p>
+          Loudness threshold
+        </p>
+        <div id="threshold"></div>
+      </div>
+
+    </div>
+
+  </section>
 
 
   <script src="https://unpkg.com/js-mobile-console@0.4.0/mobile-console.js"></script>

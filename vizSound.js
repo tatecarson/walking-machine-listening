@@ -1,6 +1,7 @@
  function vizSound() {
 
    if (soundReady) {
+     //  console.log(loudnessThreshold)
      fill(0);
      noStroke();
      text("LOUDNESS " + nf(loudness, 1, 2), width / 2 + 25, 375);

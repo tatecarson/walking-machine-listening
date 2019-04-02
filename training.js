@@ -1,15 +1,20 @@
 // training functions 
 function trainSound() {
   //train the sound 
-  machine.learn(mfcc, currentClass);
-  nSamples++;
+  if ((loudness > loudnessThreshold) && singleTrigger) {
+    machine.learn(mfcc, currentClass);
+    nSamples++;
 
-  fill(255, 0, 0);
-  noStroke();
-  ellipse(width - 25, 25, 25, 25);
+    fill(255, 0, 0);
+    noStroke();
+    ellipse(width - 25, 25, 25, 25);
 
-  singleTrigger = false;
-  startTime = millis();
+    singleTrigger = false;
+    startTime = millis();
+
+    console.log('training')
+  }
+
 }
 
 function soundDataCallback(soundData) {

@@ -28,11 +28,12 @@ var traffic, birds;
 
 var db, getData, data;
 var select;
+var trainingSpeed;
 
 function preload() {
   // load firebase
   fb();
-  mobileConsole.show();
+  // mobileConsole.show();
 }
 
 function setup() {
@@ -64,7 +65,8 @@ function setup() {
   })
 
   var threshold = new Nexus.Slider("#threshold", {
-    'min': 3,
+    'size': ["500", "100"],
+    'min': -3,
     'max': 10,
     'step': 0,
     'value': 10
@@ -73,9 +75,25 @@ function setup() {
   threshold.on('change', v => {
     loudnessThreshold = v
   })
+
+  // var train = new Nexus.Button('#train', {
+  //   size: [100, 100]
+  // })
+
+  // TODO: fix this part
+  // trainingSpeed = new Tone.Loop(trainSound, 500);
+  // train.on('change', v => {
+  //   if (v.state) {
+  //     trainingSpeed.start()
+  //   } else if (!v.state) {
+  //     trainingSpeed.stop()
+  //   }
+  // })
+  // Tone.Transport.start();
 }
 
 function draw() {
+
   background(255);
   textSize(12);
 
@@ -99,10 +117,25 @@ function draw() {
   text("loudness threshold: " + floor(loudnessThreshold), 10, 35)
   text("trainingClass: " + currentClass, 10, 35 + 50);
   text(" nSamples: " + nSamples, width - 350, 35);
-
   if (predictionAlpha > 0) predictionAlpha -= 5;
+
+  // training button
+  text('press to train', 400, 95)
+
+  fill(0, 255, 0)
+  rect(400, 100, 100, 100)
+
 }
 
-function touchStarted() {
-  trainSound();
+function touchStarted(e) {
+  if (e.screenX > 400 && e.screenX < 500 && e.screenY > 420 && e.screenY < 515) {
+    fill(255, 0, 0)
+    rect(400, 100, 100, 100)
+
+    trainSound();
+    console.log(e)
+  }
+  // console.log(e)
+  // prevent default
+  return false;
 }
