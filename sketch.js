@@ -33,7 +33,7 @@ var trainingSpeed;
 function preload() {
   // load firebase
   fb();
-  // mobileConsole.show();
+  mobileConsole.show();
 }
 
 function setup() {
