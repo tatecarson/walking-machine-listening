@@ -113,12 +113,12 @@ function draw() {
   fill(0, 255, 0)
   rect(400, 100, 100, 100)
 
-  if (touchIsDown) {
+  if (touchIsDown || mouseIsPressed) {
     fill(255, 0, 0)
     rect(400, 100, 100, 100)
 
     trainSound();
-    console.log(e)
+    // console.log(e)
   }
 }
 
