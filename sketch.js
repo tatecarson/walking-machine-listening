@@ -128,7 +128,8 @@ function draw() {
 }
 
 function touchStarted(e) {
-  if (e.screenX > 400 && e.screenX < 500 && e.screenY > 420 && e.screenY < 515) {
+  console.log(mouseX, mouseY)
+  if (mouseX > 400 && mouseX < 500 && mouseY > 100 && mouseY < 200) {
     fill(255, 0, 0)
     rect(400, 100, 100, 100)
 
