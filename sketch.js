@@ -76,20 +76,8 @@ function setup() {
     loudnessThreshold = v
   })
 
-  // var train = new Nexus.Button('#train', {
-  //   size: [100, 100]
-  // })
 
-  // TODO: fix this part
-  // trainingSpeed = new Tone.Loop(trainSound, 500);
-  // train.on('change', v => {
-  //   if (v.state) {
-  //     trainingSpeed.start()
-  //   } else if (!v.state) {
-  //     trainingSpeed.stop()
-  //   }
-  // })
-  // Tone.Transport.start();
+
 }
 
 function draw() {
@@ -124,9 +112,9 @@ function draw() {
 
   fill(0, 255, 0)
   rect(400, 100, 100, 100)
-  //change
 }
 
+// FIXME: not working on mobile 
 function touchStarted(e) {
   console.log(mouseX, mouseY)
   if (mouseX > 400 && mouseX < 500 && mouseY > 100 && mouseY < 200) {
@@ -136,7 +124,6 @@ function touchStarted(e) {
     trainSound();
     console.log(e)
   }
-  // console.log(e)
   // prevent default
   return false;
 }
