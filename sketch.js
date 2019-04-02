@@ -112,26 +112,18 @@ function draw() {
 
   fill(0, 255, 0)
   rect(400, 100, 100, 100)
-
-  if (touchIsDown || mouseIsPressed) {
-    fill(255, 0, 0)
-    rect(400, 100, 100, 100)
-
-    trainSound();
-    // console.log(e)
-  }
 }
 
 // FIXME: not working on mobile 
-// function touchStarted(e) {
-//   console.log(mouseX, mouseY)
-//   if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-//     fill(255, 0, 0)
-//     rect(400, 100, 100, 100)
+function touchStarted(e) {
+  console.log(mouseX, mouseY)
+  // if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+  fill(255, 0, 0)
+  rect(400, 100, 100, 100)
 
-//     trainSound();
-//     console.log(e)
-//   }
-//   // prevent default
-//   return false;
-// }
+  trainSound();
+  console.log(e)
+  // }
+  // prevent default
+  return false;
+}
