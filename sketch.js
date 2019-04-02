@@ -37,7 +37,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(deviceWidth, 480);
+  createCanvas(displayWidth, 480);
   audio = new MicrophoneInput(512);
   startTime = millis();
 
