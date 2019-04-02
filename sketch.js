@@ -117,7 +117,7 @@ function draw() {
 // FIXME: not working on mobile 
 function touchStarted(e) {
   console.log(mouseX, mouseY)
-  if (mouseX > 400 && mouseX < 500 && mouseY > 100 && mouseY < 200) {
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
     fill(255, 0, 0)
     rect(400, 100, 100, 100)
 
