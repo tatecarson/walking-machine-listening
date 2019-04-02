@@ -2,12 +2,13 @@ var kNear = function (k, data) {
   //PRIVATE
 
   // var training = JSON.parse(localStorage.getItem("data") || "[]");
-  var training;
+  var training = [];
   // TODO: if data is empty you get an error
   if (typeof data !== 'undefined') {
     training = JSON.parse(data) || [];
   }
-  console.log('training: ', training);
+  // console.log('data: ', data)
+  // console.log('training: ', training);
 
   var dist = function (v1, v2) {
     var sum = 0;

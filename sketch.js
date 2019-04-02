@@ -28,6 +28,7 @@ var test = 0;
 var traffic, birds;
 
 var db, getData, data;
+var select;
 
 function preload() {
   // Initialize Firebase
@@ -46,7 +47,6 @@ function preload() {
       data = doc.data();
       machine = new kNear(k, data.soundData);
     });
-    1
   });
 
   mobileConsole.show();
@@ -61,6 +61,29 @@ function setup() {
 
   traffic = new Tone.Player('sounds/traffic.mp3').toMaster();
   birds = new Tone.Player('sounds/birds.mp3').toMaster();
+
+  // biophony - insects, birds, larger animals 
+  // geophony - water, wind, weather 
+  // anthrophony - people talking, cars/trucks, air conditioning, airplanes, construction
+  select = new Nexus.Select("#select", {
+    options: [
+      "cars",
+      "construction ",
+      "human-speech",
+      "AC",
+      "airplanes",
+      "rain",
+      "wind",
+      "other-weather",
+      "insects",
+      "birds",
+      "large-animals"
+    ]
+  });
+
+  select.on('change', v => {
+    currentClass = v.value
+  })
 }
 
 function draw() {
@@ -101,19 +124,7 @@ function draw() {
 
   //TEST
   if (mouseIsPressed && (loudness > loudnessThreshold) && singleTrigger) {
-
-    //train the sound 
-    machine.learn(mfcc, currentClass);
-    nSamples++;
-
-    fill(255, 0, 0);
-    noStroke();
-    ellipse(width - 25, 25, 25, 25);
-
-    singleTrigger = false;
-    startTime = millis();
-
-
+    trainSound();
   } else if (nSamples > 0 && (loudness > loudnessThreshold) && singleTrigger) {
     // return guess of what the sound is
     fill(0, 255, 0);
@@ -125,6 +136,7 @@ function draw() {
       predictionAlpha = 255;
     }
   }
+
 
   noStroke();
   fill(0, 255, 0, predictionAlpha);
@@ -140,8 +152,23 @@ function draw() {
   text(" nSamples: " + nSamples, width - 350, 35);
 
   if (predictionAlpha > 0) predictionAlpha -= 5;
+}
 
+function touchStarted() {
+  trainSound();
+}
 
+function trainSound() {
+  //train the sound 
+  machine.learn(mfcc, currentClass);
+  nSamples++;
+
+  fill(255, 0, 0);
+  noStroke();
+  ellipse(width - 25, 25, 25, 25);
+
+  singleTrigger = false;
+  startTime = millis();
 }
 
 function soundDataCallback(soundData) {
@@ -156,31 +183,7 @@ function soundDataCallback(soundData) {
   }
 }
 
-// TODO: add buttons for birds or traffic
 
-function keyPressed() {
-  if (key == '0') {
-    currentClass = 0;
-  } else if (key == '1') {
-    currentClass = 1;
-  } else if (key == '2') {
-    currentClass = 2;
-  } else if (key == '3') {
-    currentClass = 3;
-  } else if (key == '4') {
-    currentClass = 4;
-  } else if (key == '5') {
-    currentClass = 5;
-  } else if (key == '6') {
-    currentClass = 6;
-  } else if (key == '7') {
-    currentClass = 7;
-  } else if (key == '8') {
-    currentClass = 8;
-  } else if (key == '9') {
-    currentClass = 9;
-  }
-}
 
 function saveData() {
   // saveJSON(JSON.stringify(machine.db()), 'data.json')
