@@ -94,8 +94,8 @@ function draw() {
 
 function touchStarted(e) {
 
-  if (e.clientX > 266 && e.clientX < (266 + 100) &&
-    e.clientY > 415 && e.clientY < 415 + 100) {
+  if (e.clientX > 266 && e.clientX < 357 &&
+    e.clientY > 362 && e.clientY < 456) {
     fill(255, 0, 0)
     rect(displayWidth - 110, 100, 100, 100)
 
@@ -104,17 +104,19 @@ function touchStarted(e) {
     console.log("at atouches: ", e)
     console.log("here")
   }
-  // return false;
+  return false;
 }
 
 function mousePressed(e) {
-  if (e.clientX > 266 && e.clientX < (266 + 100) &&
-    e.clientY > 415 && e.clientY < 415 + 100) {
+  if (e.clientX > 266 && e.clientX < 357 &&
+    e.clientY > 362 && e.clientY < 456) {
     fill(255, 0, 0)
     rect(displayWidth - 110, 100, 100, 100)
 
     trainSound();
 
     console.log("mouse pressed")
+
   }
+  return false;
 }
