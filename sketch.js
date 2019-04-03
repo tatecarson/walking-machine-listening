@@ -69,6 +69,10 @@ function draw() {
   }
 
   vizSound();
+
+  if (document.getElementById('record-data').checked) {
+    trainSound();
+  }
   guessSound();
 
   noStroke();
@@ -90,33 +94,35 @@ function draw() {
 
   fill(0, 255, 0)
   rect(displayWidth - 110, 100, 100, 100)
+
+
 }
 
-function touchStarted(e) {
+// function touchStarted(e) {
 
-  if (e.clientX > 266 && e.clientX < 357 &&
-    e.clientY > 362 && e.clientY < 456) {
-    fill(255, 0, 0)
-    rect(displayWidth - 110, 100, 100, 100)
+//   if (e.clientX > 266 && e.clientX < 357 &&
+//     e.clientY > 362 && e.clientY < 456) {
+//     fill(255, 0, 0)
+//     rect(displayWidth - 110, 100, 100, 100)
 
-    trainSound();
+//     trainSound();
 
-    console.log("at atouches: ", e)
-    console.log("here")
-  }
-  // return false;
-}
+//     console.log("at atouches: ", e)
+//     console.log("here")
+//   }
+//   // return false;
+// }
 
-function mousePressed(e) {
-  if (e.clientX > 266 && e.clientX < 357 &&
-    e.clientY > 362 && e.clientY < 456) {
-    fill(255, 0, 0)
-    rect(displayWidth - 110, 100, 100, 100)
+// function mousePressed(e) {
+//   if (e.clientX > 266 && e.clientX < 357 &&
+//     e.clientY > 362 && e.clientY < 456) {
+//     fill(255, 0, 0)
+//     rect(displayWidth - 110, 100, 100, 100)
 
-    trainSound();
+//     trainSound();
 
-    console.log("mouse pressed")
+//     console.log("mouse pressed")
 
-  }
-  // return false;
-}
+//   }
+//   // return false;
+// }
