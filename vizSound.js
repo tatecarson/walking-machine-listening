@@ -2,6 +2,8 @@
 
    if (soundReady) {
      //  console.log(loudnessThreshold)
+     push()
+     translate(0, -40)
      fill(0);
      noStroke();
      text("LOUDNESS " + nf(loudness, 1, 2), 10, 400 - 25);
@@ -25,4 +27,5 @@
        rect(i * (15) + 100, 375, 10, mfcc[i] * 5);
      }
    }
+   pop()
  }
