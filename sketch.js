@@ -94,9 +94,14 @@ function draw() {
 
 function touchStarted(e) {
 
-  fill(255, 0, 0)
-  rect(displayWidth - 110, 100, 100, 100)
+  if (e.clientX > 266 && e.clientX < (266 + 100) &&
+    e.clientY > 415 && e.clientY < 415 + 100) {
+    fill(255, 0, 0)
+    rect(displayWidth - 110, 100, 100, 100)
 
-  trainSound();
+    trainSound();
+
+    console.log("here")
+  }
   // return false;
 }
