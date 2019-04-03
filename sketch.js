@@ -101,7 +101,20 @@ function touchStarted(e) {
 
     trainSound();
 
+    console.log("at atouches: ", e)
     console.log("here")
   }
   // return false;
+}
+
+function mousePressed(e) {
+  if (e.clientX > 266 && e.clientX < (266 + 100) &&
+    e.clientY > 415 && e.clientY < 415 + 100) {
+    fill(255, 0, 0)
+    rect(displayWidth - 110, 100, 100, 100)
+
+    trainSound();
+
+    console.log("mouse pressed")
+  }
 }
