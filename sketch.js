@@ -43,17 +43,17 @@ function setup() {
   audio = new MicrophoneInput(512);
   startTime = millis();
 
-  var threshold = new Nexus.Slider("#threshold", {
-    'size': ["350", "100"],
-    'min': -3,
-    'max': 10,
-    'step': 0,
-    'value': 10
-  })
+  // var threshold = new Nexus.Slider("#threshold", {
+  //   'size': ["350", "100"],
+  //   'min': -3,
+  //   'max': 10,
+  //   'step': 0,
+  //   'value': 10
+  // })
 
-  threshold.on('change', v => {
-    loudnessThreshold = v
-  })
+  // threshold.on('change', v => {
+  //   loudnessThreshold = v
+  // })
 }
 
 function draw() {
@@ -80,6 +80,7 @@ function draw() {
   fill(0);
   textSize(12);
   text("nSamples: " + nSamples, 10, 35);
+  loudnessThreshold = document.getElementsByClassName('slider')[0].value
   text("loudness threshold: " + floor(loudnessThreshold), 10, 35 + 20)
   text("trainingClass: " + currentClass, 10, 35 + 40);
   if (predictionAlpha > 0) predictionAlpha -= 5;
