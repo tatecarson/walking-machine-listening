@@ -1,14 +1,9 @@
 var kNear = function (k, data) {
   //PRIVATE
-
-  // var training = JSON.parse(localStorage.getItem("data") || "[]");
   var training = [];
-  // TODO: if data is empty you get an error
   if (typeof data !== 'undefined') {
     training = JSON.parse(data) || [];
   }
-  // console.log('data: ', data)
-  // console.log('training: ', training);
 
   var dist = function (v1, v2) {
     var sum = 0;
@@ -54,9 +49,6 @@ var kNear = function (k, data) {
 
     training.push(obj);
     console.log("training at learn: ", training)
-    // add to persistent storage to get array back when reloaded
-    // localStorage.setItem('data', JSON.stringify(training))
-
 
   };
 

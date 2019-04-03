@@ -5,7 +5,7 @@
 var k = 3; //k can be any integer
 var machine;
 var test;
-var currentClass = 0;
+var currentClass = 'cars';
 var nSamples = 0;
 
 var audio;
@@ -43,31 +43,6 @@ function setup() {
   audio = new MicrophoneInput(512);
   startTime = millis();
 
-  // biophony - insects, birds, larger animals 
-  // geophony - water, wind, weather 
-  // anthrophony - people talking, cars/trucks, air conditioning, airplanes, construction
-  // FIXME: this won't open, replace with bulma select?
-  // see: https://bulma.io/documentation/form/select/
-  select = new Nexus.Select("#select-tags", {
-    options: [
-      "cars",
-      "construction ",
-      "human-speech",
-      "AC",
-      "airplanes",
-      "rain",
-      "wind",
-      "other-weather",
-      "insects",
-      "birds",
-      "large-animals"
-    ]
-  });
-
-  select.on('change', v => {
-    currentClass = v.value
-  })
-
   var threshold = new Nexus.Slider("#threshold", {
     'size': ["350", "100"],
     'min': -3,
@@ -85,6 +60,7 @@ function draw() {
 
   background(255);
   textSize(12);
+  currentClass = document.getElementById("label").value;
 
   // recording debouncer 
   timer = millis() - startTime;
@@ -120,7 +96,6 @@ function touchStarted(e) {
   fill(255, 0, 0)
   rect(displayWidth - 110, 100, 100, 100)
 
-
   trainSound();
-  return false;
+  // return false;
 }

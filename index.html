@@ -2,59 +2,92 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-  <title>p5js_simpleWebcam_100Inputs</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/B1naryStudio/js-mobile-console/style/mobile-console.min.css">
+  <title>Walking</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
   <script src="https://unpkg.com/startaudiocontext"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+  <script src="https://unpkg.com/tone@13.4.9/build/Tone.js"></script>
+  <script src="https://rawgit.com/nexus-js/ui/master/dist/NexusUI.js"></script>
+  <script src="firebase.js" type="text/javascript"></script>
+  <script src="sketch.js" type="text/javascript"></script>
   <script src="libraries/knn.js" type="text/javascript"></script>
   <script src="libraries/Audio.js" type="text/javascript"></script>
   <script src="libraries/meyda.min.js" type="text/javascript"></script>
-  <script src="https://unpkg.com/tone@13.4.9/build/Tone.js"></script>
-  <script src="https://rawgit.com/nexus-js/ui/master/dist/NexusUI.js"></script>
-  <script src="sketch.js" type="text/javascript"></script>
-  <script src="firebase.js" type="text/javascript"></script>
   <script src="training.js" type="text/javascript"></script>
   <script src="vizSound.js" type="text/javascript"></script>
   <script src="guessSound.js" type="text/javascript"></script>
 
   <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
-  <script>
-
-  </script>
-
 </head>
 
 <body>
   <section class="section">
-    <!-- <div class="container"> -->
-    <!-- <div id="container"> -->
-    <p>
+    <div class="container">
+      <h1 class="title">
+        Listen to your world
+      </h1>
+      <p class="subtitle">
+        Categorize the sounds you find and record them.
+      </p>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link" onclick="saveData()">Save Data</button>
+        </div>
+        <div class="select">
+          <select id="label">
+            <!-- biophony - insects, birds, larger animals -->
+            <!-- geophony - water, wind, weather -->
+            <!-- anthrophony - people talking, cars/trucks, air conditioning, airplanes, construction -->
+            <option value="">--Select a label--</option>
+            <option value="cars">
+              cars
+            </option>
+            <option value="construction">
+              construction
+            </option>
+            <option value="human-speech">
+              human-speech
+            </option>
+            <option value="AC">
+              AC
+            </option>
+            <option value="airplanes">
+              airplanes
+            </option>
+            <option value="rain">
+              rain
+            </option>
+            <option value="wind">
+              wind
+            </option>
+            <option value="other-weather">
+              other-weather
+            </option>
+            <option value="insects">
+              insects
+            </option>
+            <option value="birds">
+              birds
+            </option>
+            <option value="large-animal">
+              large-animal
+            </option>
+          </select>
+        </div>
 
-      <button onclick="saveData()">Save Data</button>
-    </p>
-    <p>
-
-      <div id="select-tags"></div>
-    </p>
-    <p>
-      Loudness threshold
-    </p>
-    <div id="threshold"></div>
-    <!-- </div> -->
-
-    <!-- </div> -->
-
+      </div>
+      <p>
+        Loudness threshold
+      </p>
+      <div id="threshold"></div>
+    </div>
   </section>
-
-
-  <script src="https://unpkg.com/js-mobile-console@0.4.0/mobile-console.js"></script>
-
 </body>
 
 </html>
