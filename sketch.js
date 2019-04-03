@@ -104,7 +104,7 @@ function touchStarted(e) {
     console.log("at atouches: ", e)
     console.log("here")
   }
-  return false;
+  // return false;
 }
 
 function mousePressed(e) {
@@ -118,5 +118,5 @@ function mousePressed(e) {
     console.log("mouse pressed")
 
   }
-  return false;
+  // return false;
 }
