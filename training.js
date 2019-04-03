@@ -30,9 +30,6 @@ function soundDataCallback(soundData) {
 }
 
 function saveData() {
-  // saveJSON(JSON.stringify(machine.db()), 'data.json')
-  // var data = database.ref('data');
-  // data.push(JSON.stringify(machine.db()), finished)
   var soundData = JSON.stringify(machine.db());
 
 

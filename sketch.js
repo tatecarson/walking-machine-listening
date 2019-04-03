@@ -1,4 +1,6 @@
 //Basic KNN classification of MFFCs
+// TODO: adjust the spacing to work better on mobile
+// I can't see the full canvas or the button to change labels, or save data
 
 var k = 3; //k can be any integer
 var machine;
@@ -65,7 +67,7 @@ function setup() {
   })
 
   var threshold = new Nexus.Slider("#threshold", {
-    'size': ["500", "100"],
+    'size': ["350", "100"],
     'min': -3,
     'max': 10,
     'step': 0,
@@ -75,9 +77,6 @@ function setup() {
   threshold.on('change', v => {
     loudnessThreshold = v
   })
-
-
-
 }
 
 function draw() {
@@ -102,28 +101,24 @@ function draw() {
   noStroke();
   fill(0);
   textSize(12);
-  text("loudness threshold: " + floor(loudnessThreshold), 10, 35)
-  text("trainingClass: " + currentClass, 10, 35 + 50);
-  text(" nSamples: " + nSamples, width - 350, 35);
+  text("nSamples: " + nSamples, 10, 35);
+  text("loudness threshold: " + floor(loudnessThreshold), 10, 35 + 20)
+  text("trainingClass: " + currentClass, 10, 35 + 40);
   if (predictionAlpha > 0) predictionAlpha -= 5;
 
   // training button
-  text('press to train', 400, 95)
+  text('press to train', displayWidth - 110, 95)
 
   fill(0, 255, 0)
-  rect(400, 100, 100, 100)
+  rect(displayWidth - 110, 100, 100, 100)
 }
 
-// FIXME: not working on mobile 
 function touchStarted(e) {
-  console.log(mouseX, mouseY)
-  // if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+
   fill(255, 0, 0)
-  rect(400, 100, 100, 100)
+  rect(displayWidth - 110, 100, 100, 100)
+
 
   trainSound();
-  console.log(e)
-  // }
-  // prevent default
   return false;
 }
