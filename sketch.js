@@ -39,14 +39,16 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(displayWidth, 480);
+  createCanvas(displayWidth, displayHeight);
   audio = new MicrophoneInput(512);
   startTime = millis();
 
   // biophony - insects, birds, larger animals 
   // geophony - water, wind, weather 
   // anthrophony - people talking, cars/trucks, air conditioning, airplanes, construction
-  select = new Nexus.Select("#select", {
+  // FIXME: this won't open, replace with bulma select?
+  // see: https://bulma.io/documentation/form/select/
+  select = new Nexus.Select("#select-tags", {
     options: [
       "cars",
       "construction ",
