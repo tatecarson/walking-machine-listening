@@ -40,7 +40,9 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(displayWidth, displayHeight);
+  var cnv = createCanvas(displayWidth, 200);
+  cnv.parent("sketchHolder");
+
   audio = new MicrophoneInput(512);
   startTime = millis();
 }
@@ -77,15 +79,16 @@ function draw() {
 
   noStroke();
   fill(0, 255, 0, predictionAlpha);
-  textSize(126);
-  text(test, width / 3, height / 2);
+  textSize(100);
+  text(test, 10, 150);
 
   noStroke();
   fill(0);
   textSize(12);
-  text("total samples: " + totalNumSamples, 10, 35);
+  // TODO: reposition this so you can see it and the threshold at the same time 
   loudnessThreshold = document.getElementsByClassName('slider')[0].value
-  text("loudness threshold: " + floor(loudnessThreshold), 10, 35 + 20)
-  text("trainingClass: " + currentClass, 10, 35 + 40);
+  text("loudness threshold: " + floor(loudnessThreshold), 10, 35)
+  text("total samples: " + totalNumSamples, 10, 35 + 20);
+
   if (predictionAlpha > 0) predictionAlpha -= 5;
 }

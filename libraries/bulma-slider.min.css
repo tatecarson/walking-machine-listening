@@ -948,3 +948,10 @@
 .switch[type=checkbox].is-unchecked-danger.is-outlined+label:after {
   background: #ff3860
 }
+
+#sketchHolder {
+  width: auto;
+  height: 200px;
+  margin: 0 auto;
+  position: relative;
+}
