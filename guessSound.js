@@ -1,6 +1,6 @@
   function guessSound() {
 
-    if (nSamples > 0 && (loudness > loudnessThreshold) && singleTrigger) {
+    if (totalNumSamples > 0 && (loudness > loudnessThreshold) && singleTrigger) {
       // return guess of what the sound is
       // NOTE: this is where you'll get the data to effect the sound
       fill(0, 255, 0);

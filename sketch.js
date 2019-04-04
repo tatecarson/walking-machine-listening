@@ -6,8 +6,9 @@ var k = 3; //k can be any integer
 var machine;
 var test;
 var currentClass = 'cars';
-var nSamples = 0;
-
+var totalNumSamples = 0;
+var currentNumSamples = 0;
+var currentNumSamplesFlag = true;
 var audio;
 var normalized = [];
 
@@ -42,18 +43,6 @@ function setup() {
   createCanvas(displayWidth, displayHeight);
   audio = new MicrophoneInput(512);
   startTime = millis();
-
-  // var threshold = new Nexus.Slider("#threshold", {
-  //   'size': ["350", "100"],
-  //   'min': -3,
-  //   'max': 10,
-  //   'step': 0,
-  //   'value': 10
-  // })
-
-  // threshold.on('change', v => {
-  //   loudnessThreshold = v
-  // })
 }
 
 function draw() {
@@ -70,9 +59,20 @@ function draw() {
 
   vizSound();
 
+  // Start Training 
   if (document.getElementById('record-data').checked) {
     trainSound();
+
+    if (currentNumSamplesFlag) {
+      // reset current samples to 0 when toggle is off only the first time through the loop
+      // used for discarding the most recent recording without having to refresh page
+      currentNumSamples = 0;
+      currentNumSamplesFlag = false;
+    }
+  } else {
+    currentNumSamplesFlag = true;
   }
+
   guessSound();
 
   noStroke();
@@ -83,7 +83,7 @@ function draw() {
   noStroke();
   fill(0);
   textSize(12);
-  text("nSamples: " + nSamples, 10, 35);
+  text("total samples: " + totalNumSamples, 10, 35);
   loudnessThreshold = document.getElementsByClassName('slider')[0].value
   text("loudness threshold: " + floor(loudnessThreshold), 10, 35 + 20)
   text("trainingClass: " + currentClass, 10, 35 + 40);
@@ -97,32 +97,3 @@ function draw() {
 
 
 }
-
-// function touchStarted(e) {
-
-//   if (e.clientX > 266 && e.clientX < 357 &&
-//     e.clientY > 362 && e.clientY < 456) {
-//     fill(255, 0, 0)
-//     rect(displayWidth - 110, 100, 100, 100)
-
-//     trainSound();
-
-//     console.log("at atouches: ", e)
-//     console.log("here")
-//   }
-//   // return false;
-// }
-
-// function mousePressed(e) {
-//   if (e.clientX > 266 && e.clientX < 357 &&
-//     e.clientY > 362 && e.clientY < 456) {
-//     fill(255, 0, 0)
-//     rect(displayWidth - 110, 100, 100, 100)
-
-//     trainSound();
-
-//     console.log("mouse pressed")
-
-//   }
-//   // return false;
-// }
