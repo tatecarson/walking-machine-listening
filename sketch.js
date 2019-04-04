@@ -88,12 +88,4 @@ function draw() {
   text("loudness threshold: " + floor(loudnessThreshold), 10, 35 + 20)
   text("trainingClass: " + currentClass, 10, 35 + 40);
   if (predictionAlpha > 0) predictionAlpha -= 5;
-
-  // training button
-  text('press to train', displayWidth - 110, 95)
-
-  fill(0, 255, 0)
-  rect(displayWidth - 110, 100, 100, 100)
-
-
 }
