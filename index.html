@@ -80,22 +80,33 @@
             </option>
           </select>
         </div>
-
       </div>
+  </section>
+  <section class="section">
+    <div class="container">
       <p>
         Loudness threshold
       </p>
       <input class="slider" step="0" min="-3" max="10" value="30" type="range">
-    </div>
-    <div class="field">
-      <input id="record-data" type="checkbox" name="record" class="switch is-large">
-      <label for="record-data">Record </label>
-    </div>
-    <div class="control">
-      <button class="button is-link" onclick="forgetPreviousRecording()">Forget last recording</button>
+
     </div>
 
+
   </section>
+  <section class="container">
+    <div class="container">
+      <div class="field is-grouped">
+
+        <input id="record-data" type="checkbox" name="record" class="switch is-large">
+        <label for="record-data">Record </label>
+      </div>
+      <br>
+      <div class="control">
+        <button class="button is-link" onclick="forgetPreviousRecording()">Forget last recording</button>
+      </div>
+    </div>
+  </section>
+
 </body>
 
 </html>
