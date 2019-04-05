@@ -44,18 +44,27 @@ function setup() {
   audio = new MicrophoneInput(512);
   startTime = millis();
 }
-
+ 
 function draw() {
 
   background(255);
   textSize(12);
+
+  //UI elements
   currentClass = document.getElementById("label").value;
   var record = document.getElementById('record-data');
+  loudnessSlider = document.getElementsByClassName('slider')[0];
+
   if (currentClass == '') {
     // console.log("please select a label before recording")
     record.disabled = true
+    loudnessSlider.disabled = true
+    loudnessSlider.style.opacity = 0.1;
   } else {
     record.disabled = false
+    loudnessSlider.disabled = false
+    loudnessSlider.style.opacity = 0.7;
+
   }
 
   // recording debouncer 
@@ -90,8 +99,7 @@ function draw() {
   noStroke();
   fill(0);
   textSize(12);
-  loudnessThreshold = document.getElementsByClassName('slider')[0].value
-  text("loudness threshold: " + floor(loudnessThreshold), 10, 35)
+  text("loudness threshold: " + floor(loudnessSlider.value), 10, 35)
   text("total samples: " + totalNumSamples, 10, 35 + 20);
 
   if (predictionAlpha > 0) predictionAlpha -= 5;

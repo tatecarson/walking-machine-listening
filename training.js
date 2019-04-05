@@ -45,6 +45,7 @@ function saveData() {
       soundData
     })
     .then(function (docRef) {
+      // TODO: write success message to the screen so you can tell you clicked the button
       console.log("Document written with ID: ", docRef.id);
     })
     .catch(function (error) {

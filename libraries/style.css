@@ -23,6 +23,7 @@
   transition: opacity .2s;
 }
 
+
 /* Mouse-over effects */
 .slider:hover {
   opacity: 1;
