@@ -41,16 +41,27 @@ function saveData() {
   var soundData = JSON.stringify(machine.db());
 
 
-  db.collection("sounds").add({
-      soundData
-    })
-    .then(function (docRef) {
-      // TODO: write success message to the screen so you can tell you clicked the button
-      console.log("Document written with ID: ", docRef.id);
-    })
-    .catch(function (error) {
-      console.error("Error adding document: ", error);
-    });
+  // db.collection("sounds").add({
+  //     soundData
+  //   })
+  //   .then(function (docRef) {
+  //     // TODO: write success message to the screen so you can tell you clicked the button
+  //     console.log("Document written with ID: ", docRef.id);
+  //   })
+  //   .catch(function (error) {
+  //     console.error("Error adding document: ", error);
+  //   });
+
+  var sounds = db.collection("sounds");
+  sounds.doc('latest').set({
+    soundData
+  }).then(function (doc) {
+    console.log("Success");
+    document.getElementById('save-success').style.display = 'block'
+  }).catch(function (error) {
+    console.log("Error getting document:", error);
+  });
+
 
   function finished(err) {
     if (err) {

@@ -4,7 +4,7 @@ var kNear = function (k, data) {
   if (typeof data !== 'undefined') {
     training = JSON.parse(data) || [];
   }
-
+  console.log('data at kNear: ', training)
   var dist = function (v1, v2) {
     var sum = 0;
     v1.forEach(function (val, index) {

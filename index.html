@@ -89,7 +89,7 @@
 
       </div>
       <div id="sketchHolder"></div>
-      <div class="container">
+      <!-- <div class="container">
         <div class="field is-grouped">
 
           <input id="record-data" type="checkbox" name="record" class="switch is-large">
@@ -100,12 +100,52 @@
           <button class="button is-link" onclick="forgetPreviousRecording()">Forget last recording</button>
         </div>
       </div>
-      <br>
+      <br> -->
 
-      <div class="control">
-        <button class="button is-link" onclick="saveData()">Save All Recordings</button>
+
+
+      <div class="columns is-mobile">
+        <div class="column">
+          <div class="field is-grouped">
+
+            <input id="record-data" type="checkbox" name="record" class="switch is-large">
+            <label for="record-data">Record </label>
+          </div>
+        </div>
+        <div class="column">
+          <div class="control">
+            <button class="button is-link" onclick="forgetPreviousRecording()">Forget last recording</button>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="columns is-mobile">
+        <div class="column">
+          <div class="control">
+            <button class="button is-link is-medium" onclick="saveData()">Save All Recordings</button>
+          </div>
+
+        </div>
+        <div class="column" id="save-success">
+          <div class="notification is-success">
+            <button class="delete"></button>
+            Success!
+
+          </div>
+        </div>
       </div>
   </section>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+        $notification = $delete.parentNode;
+        $delete.addEventListener('click', () => {
+          $notification.parentNode.removeChild($notification);
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
