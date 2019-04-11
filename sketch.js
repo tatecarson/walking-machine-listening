@@ -1,5 +1,4 @@
 //Basic KNN classification of MFFCs
-
 var k = 3; //k can be any integer
 var machine;
 var test;
@@ -44,7 +43,7 @@ function setup() {
   audio = new MicrophoneInput(512);
   startTime = millis();
 }
- 
+
 function draw() {
 
   background(255);
