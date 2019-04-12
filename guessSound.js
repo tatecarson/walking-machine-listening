@@ -1,14 +1,14 @@
-  function guessSound() {
+function guessSound() {
 
-    if (totalNumSamples > 0 && (loudness > loudnessThreshold) && singleTrigger) {
-      // return guess of what the sound is
-      fill(0, 255, 0);
-      if (loudness > loudnessThreshold) {
+  if (totalNumSamples > 0 && (loudness > loudnessThreshold) && singleTrigger) {
+    // return guess of what the sound is
+    fill(0, 255, 0);
+    if (loudness > loudnessThreshold) {
 
-        test = machine.classify(mfcc);
-        singleTrigger = false;
-        startTime = millis();
-        predictionAlpha = 255;
-      }
+      test = machine.classify(mfcc);
+      singleTrigger = false;
+      startTime = millis();
+      predictionAlpha = 255;
     }
   }
+}

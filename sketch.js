@@ -53,6 +53,7 @@ function draw() {
   currentClass = document.getElementById("label").value;
   var record = document.getElementById('record-data');
   loudnessSlider = document.getElementsByClassName('slider')[0];
+  loudnessThreshold = loudnessSlider.value;
 
   if (currentClass == '') {
     // console.log("please select a label before recording")
