@@ -1,60 +1,101 @@
-.slidecontainer {
+input[type=range] {
+  -webkit-appearance: none;
   width: 100%;
-  /* Width of the outside container */
+  margin: 20px 0;
 }
 
-/* The slider itself */
-.slider {
-  -webkit-appearance: none;
-  /* Override default CSS styles */
-  appearance: none;
-  width: 100%;
-  /* Full-width */
-  height: 25px;
-  /* Specified height */
-  background: #d3d3d3;
-  /* Grey background */
+input[type=range]:focus {
   outline: none;
-  /* Remove outline */
-  opacity: 0.7;
-  /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: .2s;
-  /* 0.2 seconds transition on hover */
-  transition: opacity .2s;
 }
 
-
-/* Mouse-over effects */
-.slider:hover {
-  opacity: 1;
-  /* Fully shown on mouse-over */
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 12.6px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #9e8483;
+  border-radius: 6.2px;
+  border: 0.7px solid #562425;
 }
 
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-.slider::-webkit-slider-thumb {
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #050000, 0px 0px 1px #1f0000;
+  border: 2.2px solid #000000;
+  height: 50px;
+  width: 27px;
+  border-radius: 50px;
+  background: #00ffff;
+  cursor: pointer;
   -webkit-appearance: none;
-  /* Override default look */
-  appearance: none;
-  width: 25px;
-  /* Set a specific slider handle width */
-  height: 25px;
-  /* Slider handle height */
-  background: #4CAF50;
-  /* Green background */
-  cursor: pointer;
-  /* Cursor on hover */
+  margin-top: -19.4px;
 }
 
-.slider::-moz-range-thumb {
-  width: 25px;
-  /* Set a specific slider handle width */
-  height: 25px;
-  /* Slider handle height */
-  background: #4CAF50;
-  /* Green background */
-  cursor: pointer;
-  /* Cursor on hover */
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #dfd6d6;
 }
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 12.6px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #9e8483;
+  border-radius: 6.2px;
+  border: 0.7px solid #562425;
+}
+
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #050000, 0px 0px 1px #1f0000;
+  border: 2.2px solid #000000;
+  height: 50px;
+  width: 27px;
+  border-radius: 50px;
+  background: #00ffff;
+  cursor: pointer;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 12.6px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+  background: #4f3f3e;
+  border: 0.7px solid #562425;
+  border-radius: 12.4px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range]::-ms-fill-upper {
+  background: #9e8483;
+  border: 0.7px solid #562425;
+  border-radius: 12.4px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #050000, 0px 0px 1px #1f0000;
+  border: 2.2px solid #000000;
+  height: 50px;
+  width: 27px;
+  border-radius: 50px;
+  background: #00ffff;
+  cursor: pointer;
+  height: 12.6px;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+  background: #9e8483;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+  background: #dfd6d6;
+}
+
 
 @-webkit-keyframes spinAround {
   from {
