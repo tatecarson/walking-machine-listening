@@ -40,18 +40,6 @@ function soundDataCallback(soundData) {
 function saveData() {
   var soundData = JSON.stringify(machine.db());
 
-
-  // db.collection("sounds").add({
-  //     soundData
-  //   })
-  //   .then(function (docRef) {
-  //     // TODO: write success message to the screen so you can tell you clicked the button
-  //     console.log("Document written with ID: ", docRef.id);
-  //   })
-  //   .catch(function (error) {
-  //     console.error("Error adding document: ", error);
-  //   });
-
   var sounds = db.collection("sounds");
   sounds.doc('latest').set({
     soundData
