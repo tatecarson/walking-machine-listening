@@ -1,34 +1,36 @@
-//Basic KNN classification of MFFCs
-var k = 3; //k can be any integer
-var machine;
-var test;
-var currentClass = 'cars';
-var totalNumSamples = 0;
-var currentNumSamples = 0;
-var currentNumSamplesFlag = true;
-var audio;
-var normalized = [];
+// Basic KNN classification of MFFCs
+const k = 3; // k can be any integer
+let machine;
+let test;
+let currentClass = 'cars';
+let totalNumSamples = 0; //eslint-disable-line
+let currentNumSamples = 0;
+let currentNumSamplesFlag = true;
+let audio;
+const normalized = [];
 
-var mfcc;
-var loudness = 0;
-var loudnessThreshold = 10;
+let mfcc;
+let loudness = 0; //eslint-disable-line
+let loudnessThreshold = 10;
 
-var soundReady = false;
+let soundReady = false; //eslint-disable-line
 
-//TRIGGER MODE
-var predictionAlpha = 255;
+// TRIGGER MODE
+let predictionAlpha = 255;
 
-var singleTrigger = true;
-var startTime;
-var triggerTimerThreshold = 300;
-var timer;
-var test = '';
+let singleTrigger = true;
+let startTime;
+const triggerTimerThreshold = 300;
+let timer;
 
-var traffic, birds;
+let traffic;
+let birds;
 
-var db, getData, data;
-var select;
-var trainingSpeed;
+let db;
+let getData;
+let data;
+let select;
+let trainingSpeed;
 
 let musicToggle;
 let musicToggleFlag = true;
@@ -40,8 +42,8 @@ function preload() {
 }
 
 function setup() {
-  var cnv = createCanvas(displayWidth, 200);
-  cnv.parent("sketchHolder");
+  const cnv = createCanvas(displayWidth, 200);
+  cnv.parent('sketchHolder');
 
   audio = new MicrophoneInput(512);
   startTime = millis();
@@ -54,61 +56,64 @@ function draw() {
   /**
    * Setup UI elements
    */
-  currentClass = document.getElementById("label").value;
-  var record = document.getElementById('record-data');
+  currentClass = document.getElementById('label').value;
+  const record = document.getElementById('record-data');
   loudnessSlider = document.getElementsByClassName('slider')[0];
   loudnessThreshold = loudnessSlider.value;
 
-  /** 
+  /**
    * Start and stop music
-   * dispose for better performance 
+   * dispose for better performance
    */
-  musicToggle = document.getElementById('music-on')
+  musicToggle = document.getElementById('music-on');
   if (musicToggle.checked && musicToggleFlag) {
     instrument = instrumentInit();
     instrument.volume.volume.value = -3;
     Tone.Transport.start();
     musicToggleFlag = false;
-
   } else if (!musicToggle.checked && !musicToggleFlag) {
     Tone.Transport.stop();
 
-    //fade out then dispose so no clicks
+    // fade out then dispose so no clicks
     instrument.volume.volume.rampTo(-60, 5);
     musicToggleFlag = true;
   }
 
   // check if instrument exists, if it isn't full of nulls, and if it has faded out
   // then dispose
-  if (instrument && !_.isNull(instrument.volume.volume) && floor(instrument.volume.volume.value) == -60) {
+  if (
+    instrument &&
+    !_.isNull(instrument.volume.volume) &&
+    floor(instrument.volume.volume.value) === -60
+  ) {
     instrument.dispose();
-    console.log('disposed')
+    console.log('disposed');
   }
-
 
   /**
    * deal with training sounds and guessing sounds
    */
-  if (currentClass == '') {
+  if (currentClass === '') {
     // console.log("please select a label before recording")
-    record.disabled = true
-    loudnessSlider.disabled = true
+    record.disabled = true;
+    loudnessSlider.disabled = true;
     loudnessSlider.style.opacity = 0.1;
   } else {
-    record.disabled = false
-    loudnessSlider.disabled = false
+    record.disabled = false;
+    loudnessSlider.disabled = false;
     loudnessSlider.style.opacity = 0.7;
   }
 
-  // recording debouncer 
+  // recording debouncer
   timer = millis() - startTime;
   if (timer > triggerTimerThreshold) {
     singleTrigger = true;
   }
 
+  guessSound();
   vizSound();
 
-  // Start Training 
+  // Start Training
   if (record.checked) {
     trainSound();
 
@@ -122,8 +127,6 @@ function draw() {
     currentNumSamplesFlag = true;
   }
 
-  guessSound();
-
   noStroke();
   fill(0, 255, 0, predictionAlpha);
   textSize(50);
@@ -132,8 +135,8 @@ function draw() {
   noStroke();
   fill(0);
   textSize(12);
-  text("loudness threshold: " + floor(loudnessSlider.value), 10, 35)
-  text("total samples: " + totalNumSamples, 10, 35 + 20);
+  text(`loudness threshold: ${floor(loudnessSlider.value)}`, 10, 35);
+  text(`total samples: ${totalNumSamples}`, 10, 35 + 20);
 
   if (predictionAlpha > 0) predictionAlpha -= 5;
 }

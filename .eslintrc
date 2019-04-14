@@ -1,0 +1,11 @@
+{
+  "extends":["wesbos"],
+  "rules": {
+    "no-undef": "off",
+    "no-undefined": "off",
+    "no-unused-vars": "off",
+    "no-prototype-builtins":"off",
+    "no-plusplus":"off",
+    "prefer-destructuring": "off"
+  }
+}

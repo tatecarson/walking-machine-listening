@@ -1,9 +1,8 @@
-// training functions 
+// training functions
 function trainSound() {
-  //train the sound 
+  // train the sound
 
-
-  if ((loudness > loudnessThreshold) && singleTrigger) {
+  if (loudness > loudnessThreshold && singleTrigger) {
     machine.learn(mfcc, currentClass);
     totalNumSamples++;
     currentNumSamples++;
@@ -15,14 +14,13 @@ function trainSound() {
     singleTrigger = false;
     startTime = millis();
 
-    console.log('training')
+    console.log('training');
   }
-
 }
 
 function forgetPreviousRecording() {
-  machine.db().splice(0, currentNumSamples)
-  totalNumSamples = totalNumSamples - currentNumSamples
+  machine.db().splice(0, currentNumSamples);
+  totalNumSamples -= currentNumSamples;
 }
 
 function soundDataCallback(soundData) {
@@ -30,34 +28,36 @@ function soundDataCallback(soundData) {
   mfcc = soundData.mfcc;
   loudness = soundData.loudness.total;
 
-  var peaked = false;
+  const peaked = false;
 
-  for (var i = 0; i < 13; i++) {
+  for (let i = 0; i < 13; i++) {
     normalized[i] = map(mfcc[i], -10, 30, 0, 1);
   }
 }
 
 function saveData() {
-  var soundData = JSON.stringify(machine.db());
+  const soundData = JSON.stringify(machine.db());
 
-  var sounds = db.collection("sounds");
-  sounds.doc('latest').set({
-    soundData
-  }).then(function (doc) {
-    console.log("Success");
-    document.getElementById('save-success').style.display = 'block'
-  }).catch(function (error) {
-    console.log("Error getting document:", error);
-  });
-
+  const sounds = db.collection('sounds');
+  sounds
+    .doc('latest')
+    .set({
+      soundData,
+    })
+    .then(function(doc) {
+      console.log('Success');
+      document.getElementById('save-success').style.display = 'block';
+    })
+    .catch(function(error) {
+      console.log('Error getting document:', error);
+    });
 
   function finished(err) {
     if (err) {
-      console.log("ooops, something went wrong.");
+      console.log('ooops, something went wrong.');
       console.log(err);
     } else {
       console.log('Data saved successfully');
-
     }
   }
 }
