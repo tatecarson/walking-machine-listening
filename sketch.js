@@ -30,10 +30,13 @@ var db, getData, data;
 var select;
 var trainingSpeed;
 
+let musicToggle;
+let musicToggleFlag = true;
+let instrument;
+
 function preload() {
   // load firebase
   fb();
-  // mobileConsole.show();
 }
 
 function setup() {
@@ -45,16 +48,47 @@ function setup() {
 }
 
 function draw() {
-
   background(255);
   textSize(12);
 
-  //UI elements
+  /**
+   * Setup UI elements
+   */
   currentClass = document.getElementById("label").value;
   var record = document.getElementById('record-data');
   loudnessSlider = document.getElementsByClassName('slider')[0];
   loudnessThreshold = loudnessSlider.value;
 
+  /** 
+   * Start and stop music
+   * dispose for better performance 
+   */
+  musicToggle = document.getElementById('music-on')
+  if (musicToggle.checked && musicToggleFlag) {
+    instrument = instrumentInit();
+    instrument.volume.volume.value = -3;
+    Tone.Transport.start();
+    musicToggleFlag = false;
+
+  } else if (!musicToggle.checked && !musicToggleFlag) {
+    Tone.Transport.stop();
+
+    //fade out then dispose so no clicks
+    instrument.volume.volume.rampTo(-60, 5);
+    musicToggleFlag = true;
+  }
+
+  // check if instrument exists, if it isn't full of nulls, and if it has faded out
+  // then dispose
+  if (instrument && !_.isNull(instrument.volume.volume) && floor(instrument.volume.volume.value) == -60) {
+    instrument.dispose();
+    console.log('disposed')
+  }
+
+
+  /**
+   * deal with training sounds and guessing sounds
+   */
   if (currentClass == '') {
     // console.log("please select a label before recording")
     record.disabled = true
@@ -64,7 +98,6 @@ function draw() {
     record.disabled = false
     loudnessSlider.disabled = false
     loudnessSlider.style.opacity = 0.7;
-
   }
 
   // recording debouncer 
