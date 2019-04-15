@@ -1,9 +1,19 @@
+// TODO: check on androids
+
 const md = new MobileDetect(window.navigator.userAgent);
 
-if (md.mobile()) {
-  document.getElementById('recorded-walk').style.display = 'none';
+// only add test file if on desktop
+if (md.mobile() !== 'null') {
+  document.getElementById('recorded-walk').innerHTML = `
+    <source src="myExample.mp3" type="audio/mp3">
+    <source src="myExample.wav" type="audio/wav">
+    <p>Browser too old to support HTML5 audio? How depressing!</p>
+  `;
+} else {
+  console.log(`you're on mobile`);
 }
 
+// force safari, microphone doesn't work in chrome
 if (md.mobile() === 'iPhone' && md.userAgent() !== 'Safari') {
   document.body.innerHTML = `
       <section class="hero is-primary is-medium">
