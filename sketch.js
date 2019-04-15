@@ -59,7 +59,7 @@ function draw() {
   currentClass = document.getElementById('label').value;
   const record = document.getElementById('record-data');
   loudnessSlider = document.getElementsByClassName('slider')[0];
-  loudnessThreshold = loudnessSlider.value;
+  loudnessThreshold = Number(loudnessSlider.value);
 
   /**
    * deal with training sounds and guessing sounds
@@ -67,12 +67,8 @@ function draw() {
   if (currentClass === '') {
     // console.log("please select a label before recording")
     record.disabled = true;
-    loudnessSlider.disabled = true;
-    loudnessSlider.style.opacity = 0.1;
   } else {
     record.disabled = false;
-    loudnessSlider.disabled = false;
-    loudnessSlider.style.opacity = 0.7;
   }
 
   // recording debouncer
@@ -81,12 +77,10 @@ function draw() {
     singleTrigger = true;
   }
 
-  guessSound();
-  vizSound();
-
   // Start Training
   if (record.checked) {
     trainSound();
+    vizSound();
 
     if (currentNumSamplesFlag) {
       // reset current samples to 0 when toggle is off only the first time through the loop
@@ -96,6 +90,9 @@ function draw() {
     }
   } else {
     currentNumSamplesFlag = true;
+
+    // guess only when not training
+    guessSound();
   }
 
   noStroke();

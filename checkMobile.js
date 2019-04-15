@@ -5,7 +5,6 @@ const md = new MobileDetect(window.navigator.userAgent);
 // only add test file if on desktop
 // eslint-disable-next-line no-restricted-globals
 if (screen.width > 450) {
-  console.log('here');
   document.getElementById('recorded-walk').innerHTML = `
   <audio controls loop crossorigin="anonymous" id="recorded-walk">
     <source src="myExample.mp3" type="audio/mp3">
