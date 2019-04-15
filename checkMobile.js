@@ -3,7 +3,7 @@
 const md = new MobileDetect(window.navigator.userAgent);
 
 // only add test file if on desktop
-if (md.mobile() !== 'null') {
+if (!md.mobile()) {
   document.getElementById('recorded-walk').innerHTML = `
     <source src="myExample.mp3" type="audio/mp3">
     <source src="myExample.wav" type="audio/wav">
