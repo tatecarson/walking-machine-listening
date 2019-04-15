@@ -3,11 +3,15 @@
 const md = new MobileDetect(window.navigator.userAgent);
 
 // only add test file if on desktop
-if (!md.mobile()) {
+// eslint-disable-next-line no-restricted-globals
+if (screen.width > 450) {
+  console.log('here');
   document.getElementById('recorded-walk').innerHTML = `
+  <audio controls loop crossorigin="anonymous" id="recorded-walk">
     <source src="myExample.mp3" type="audio/mp3">
     <source src="myExample.wav" type="audio/wav">
     <p>Browser too old to support HTML5 audio? How depressing!</p>
+  </audio>
   `;
 } else {
   console.log(`you're on mobile`);
