@@ -9,5 +9,4 @@ function vizSound() {
       fill(122);
     }
   }
-  //
 }

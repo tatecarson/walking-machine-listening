@@ -28,8 +28,6 @@ function soundDataCallback(soundData) {
   mfcc = soundData.mfcc;
   loudness = soundData.loudness.total;
 
-  const peaked = false;
-
   for (let i = 0; i < 13; i++) {
     normalized[i] = map(mfcc[i], -10, 30, 0, 1);
   }

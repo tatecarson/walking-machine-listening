@@ -1,7 +1,7 @@
 // Basic KNN classification of MFFCs
 const k = 3; // k can be any integer
 let machine;
-let test;
+let soundGuess;
 let currentClass = 'cars';
 let totalNumSamples = 0; //eslint-disable-line
 let currentNumSamples = 0;
@@ -62,35 +62,6 @@ function draw() {
   loudnessThreshold = loudnessSlider.value;
 
   /**
-   * Start and stop music
-   * dispose for better performance
-   */
-  musicToggle = document.getElementById('music-on');
-  if (musicToggle.checked && musicToggleFlag) {
-    instrument = instrumentInit();
-    instrument.volume.volume.value = -3;
-    Tone.Transport.start();
-    musicToggleFlag = false;
-  } else if (!musicToggle.checked && !musicToggleFlag) {
-    Tone.Transport.stop();
-
-    // fade out then dispose so no clicks
-    instrument.volume.volume.rampTo(-60, 5);
-    musicToggleFlag = true;
-  }
-
-  // check if instrument exists, if it isn't full of nulls, and if it has faded out
-  // then dispose
-  if (
-    instrument &&
-    !_.isNull(instrument.volume.volume) &&
-    floor(instrument.volume.volume.value) === -60
-  ) {
-    instrument.dispose();
-    console.log('disposed');
-  }
-
-  /**
    * deal with training sounds and guessing sounds
    */
   if (currentClass === '') {
@@ -130,7 +101,7 @@ function draw() {
   noStroke();
   fill(0, 255, 0, predictionAlpha);
   textSize(50);
-  text(test, 10, 150);
+  text(soundGuess, 10, 150);
 
   noStroke();
   fill(0);
@@ -139,4 +110,41 @@ function draw() {
   text(`total samples: ${totalNumSamples}`, 10, 35 + 20);
 
   if (predictionAlpha > 0) predictionAlpha -= 5;
+
+  /**
+   * Start and stop music
+   * dispose for better performance
+   */
+  musicToggle = document.getElementById('music-on');
+  if (musicToggle.checked && musicToggleFlag) {
+    instrument = instrumentInit();
+    instrument.volume.volume.rampTo(-3, 4);
+    Tone.Transport.start();
+
+    musicToggleFlag = false;
+  } else if (!musicToggle.checked && !musicToggleFlag) {
+    Tone.Transport.stop();
+
+    // fade out then dispose so no clicks
+    instrument.volume.volume.rampTo(-60, 5);
+    musicToggleFlag = true;
+  }
+
+  // check if instrument exists, if it isn't full of nulls, and if it has faded out
+  // then dispose
+  if (
+    instrument &&
+    !_.isNull(instrument.volume.volume) &&
+    floor(instrument.volume.volume.value) === -60
+  ) {
+    instrument.dispose();
+    console.log('disposed');
+  }
+
+  /**
+   * Sound functions that repeat
+   */
+  if (instrument && !_.isNull(instrument.volume.volume)) {
+    soundUpdates();
+  }
 }

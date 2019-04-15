@@ -129,3 +129,41 @@ NOTES.forEach(note => {
   const playNote = () => instrument.piano.triggerAttack(note, `+${start}`);
   Tone.Transport.scheduleRepeat(playNote, interval, `+${delay}`);
 });
+
+// FIXME: getting an undefined type
+const soundTypes = {
+  geo: ['wind', 'other-weather', 'rain'],
+  bio: ['insects', 'birds', 'larger-animal'],
+  anthro: ['cars', 'construction', 'human-speech', 'AC', 'airplanes'],
+};
+
+let anthroFlag = true;
+const soundUpdates = () => {
+  let soundGuessType;
+  Object.keys(soundTypes).forEach(tags => {
+    if (soundTypes[tags].includes(soundGuess)) {
+      soundGuessType = tags;
+    }
+  });
+
+  // TODO: get other features from meyda?
+  // if made by humans turn the music almost all the way off
+  // TODO: if made by earth use loudness and values of mfccs to control
+  // modulationindex and harmonicity
+
+  // FIXME: getting a clicking sound when changing volumes
+  console.log(instrument.volume.volume.value);
+  if (soundGuessType === 'anthro' && anthroFlag) {
+    instrument.volume.volume.rampTo(-40, 4);
+    console.count('anthro');
+    anthroFlag = false;
+  } else if (soundGuessType === 'geo') {
+    instrument.volume.volume.value = map(loudness, 0, 24, -50, -6);
+
+    console.log('geo');
+    anthroFlag = true;
+  } else if (soundGuessType === 'bio') {
+    anthroFlag = true;
+    console.log('bio');
+  }
+};
