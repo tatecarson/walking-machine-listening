@@ -157,7 +157,6 @@ const soundUpdates = () => {
     }
   });
 
-  // TODO: if made by earth use loudness and values of mfccs to control
   if (loudness > loudnessThreshold) {
     // average out the past 200 loudness values
     runningLoudness.push(loudness);
@@ -180,14 +179,24 @@ const soundUpdates = () => {
       geoFlag = true;
     } else if (soundGuessType === 'geo' && geoFlag) {
       const avg = Nexus.average(runningLoudness);
+      // remove NaNs
       if (!_.isNaN(avg)) {
         instrument.volume.volume.setTargetAtTime(
-          map(avg, 0, 24, -50, -6),
+          map(avg, 0, 24, -20, -3),
           Tone.now(),
           1
         );
+        // TODO: add in changes to FM synth that respond to wind
+        const modIndex = map(avg, 0, 24, 4, 8);
+        instrument.piano.modulationIndex.setTargetAtTime(
+          modIndex,
+          Tone.now(),
+          1
+        );
+        const harmVal = map(avg, 0, 24, 8, 24);
+        instrument.piano.harmonicity.setTargetAtTime(harmVal, Tone.now(), 1);
+        console.log(instrument.piano.modulationIndex.value);
       }
-      // TODO: add in changes to FM synth that respond to wind
       // modulationindex and harmonicity
       console.count('geo');
       anthroFlag = true;
@@ -195,12 +204,12 @@ const soundUpdates = () => {
       geoFlag = false;
     }
   } else if (bioFlag) {
-    instrument.volume.volume.setTargetAtTime(-40, Tone.now(), 1);
+    instrument.volume.volume.setTargetAtTime(-30, Tone.now(), 1);
 
     console.count('bio');
     anthroFlag = true;
     geoFlag = true;
     bioFlag = false;
   }
-  console.log('CurrentVolume: ', instrument.volume.volume.value);
+  // console.log('CurrentVolume: ', instrument.volume.volume.value);
 };

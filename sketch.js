@@ -49,6 +49,8 @@ function setup() {
   startTime = millis();
 
   // test for user or trainer
+  // to train go to walking.netlify.com/#train
+  // eslint-disable-next-line no-restricted-globals
   if (location.hash === '#train') {
     console.log('youre a trainer');
   } else {
