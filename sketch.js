@@ -47,6 +47,13 @@ function setup() {
 
   audio = new MicrophoneInput(512);
   startTime = millis();
+
+  // test for user or trainer
+  if (location.hash === '#train') {
+    console.log('youre a trainer');
+  } else {
+    document.getElementById('save-data').style.display = 'none';
+  }
 }
 
 function draw() {
