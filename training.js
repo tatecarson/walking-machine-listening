@@ -1,7 +1,7 @@
 // training functions
 function trainSound() {
   // train the sound
-  console.log(loudness > loudnessThreshold, singleTrigger);
+  console.log('at training: ', loudness > loudnessThreshold, singleTrigger);
 
   if (loudness > loudnessThreshold && singleTrigger) {
     machine.learn(mfcc, currentClass);

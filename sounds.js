@@ -130,14 +130,25 @@ NOTES.forEach(note => {
   Tone.Transport.scheduleRepeat(playNote, interval, `+${delay}`);
 });
 
-// FIXME: getting an undefined type
 const soundTypes = {
   geo: ['wind', 'other-weather', 'rain'],
-  bio: ['insects', 'birds', 'larger-animal'],
-  anthro: ['cars', 'construction', 'human-speech', 'AC', 'airplanes'],
+  bio: ['insects', 'birds', 'large-animal'],
+  anthro: [
+    'cars',
+    'construction',
+    'human-speech',
+    'AC',
+    'airplanes',
+    'footsteps',
+  ],
 };
 
 let anthroFlag = true;
+let bioFlag = true;
+let geoFlag = true;
+// collect to smooth values
+let runningLoudness = [];
+let currentVol;
 const soundUpdates = () => {
   let soundGuessType;
   Object.keys(soundTypes).forEach(tags => {
@@ -146,24 +157,50 @@ const soundUpdates = () => {
     }
   });
 
-  // TODO: get other features from meyda?
-  // if made by humans turn the music almost all the way off
   // TODO: if made by earth use loudness and values of mfccs to control
-  // modulationindex and harmonicity
+  if (loudness > loudnessThreshold) {
+    // average out the past 200 loudness values
+    runningLoudness.push(loudness);
+    if (runningLoudness.length > 200) {
+      runningLoudness = [];
+    }
 
-  // FIXME: getting a clicking sound when changing volumes
-  console.log(instrument.volume.volume.value);
-  if (soundGuessType === 'anthro' && anthroFlag) {
-    instrument.volume.volume.rampTo(-40, 4);
-    console.count('anthro');
-    anthroFlag = false;
-  } else if (soundGuessType === 'geo') {
-    instrument.volume.volume.value = map(loudness, 0, 24, -50, -6);
+    /**
+     * Anthro - turn up music
+     * geo - music matches incoming loudness
+     * bio - turn down music
+     */
+    const rampDelay = 10;
+    if (soundGuessType === 'anthro' && anthroFlag) {
+      instrument.volume.volume.setTargetAtTime(-3, Tone.now(), 1);
 
-    console.log('geo');
+      console.count('anthro');
+      anthroFlag = false;
+      bioFlag = true;
+      geoFlag = true;
+    } else if (soundGuessType === 'geo' && geoFlag) {
+      const avg = Nexus.average(runningLoudness);
+      if (!_.isNaN(avg)) {
+        instrument.volume.volume.setTargetAtTime(
+          map(avg, 0, 24, -50, -6),
+          Tone.now(),
+          1
+        );
+      }
+      // TODO: add in changes to FM synth that respond to wind
+      // modulationindex and harmonicity
+      console.count('geo');
+      anthroFlag = true;
+      bioFlag = true;
+      geoFlag = false;
+    }
+  } else if (bioFlag) {
+    instrument.volume.volume.setTargetAtTime(-40, Tone.now(), 1);
+
+    console.count('bio');
     anthroFlag = true;
-  } else if (soundGuessType === 'bio') {
-    anthroFlag = true;
-    console.log('bio');
+    geoFlag = true;
+    bioFlag = false;
   }
+  console.log('CurrentVolume: ', instrument.volume.volume.value);
 };

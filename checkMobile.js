@@ -7,8 +7,7 @@ const md = new MobileDetect(window.navigator.userAgent);
 if (screen.width > 450) {
   document.getElementById('recorded-walk').innerHTML = `
   <audio controls loop crossorigin="anonymous" id="recorded-walk">
-    <source src="myExample.mp3" type="audio/mp3">
-    <source src="myExample.wav" type="audio/wav">
+    <source src="walking4-15-19.mp3" type="audio/mp3">
     <p>Browser too old to support HTML5 audio? How depressing!</p>
   </audio>
   `;
