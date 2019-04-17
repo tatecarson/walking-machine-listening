@@ -133,14 +133,8 @@ NOTES.forEach(note => {
 const soundTypes = {
   geo: ['wind', 'other-weather', 'rain'],
   // footsteps are in bio so that when walking one can hear the nature
-  bio: ['insects', 'birds', 'large-animal',   'footsteps'],
-  anthro: [
-    'cars',
-    'construction',
-    'human-speech',
-    'AC',
-    'airplanes'
-  ],
+  bio: ['insects', 'birds', 'large-animal', 'footsteps'],
+  anthro: ['cars', 'construction', 'human-speech', 'AC', 'airplanes'],
 };
 
 let anthroFlag = true;
@@ -204,12 +198,13 @@ const soundUpdates = () => {
       geoFlag = false;
     }
   } else if (bioFlag) {
-    instrument.volume.volume.setTargetAtTime(-30, Tone.now(), 1);
+    // if -60 it will dispose so keep it above that
+    instrument.volume.volume.setTargetAtTime(-59, Tone.now(), 1);
 
     console.count('bio');
     anthroFlag = true;
     geoFlag = true;
     bioFlag = false;
   }
-  // console.log('CurrentVolume: ', instrument.volume.volume.value);
+  console.log('CurrentVolume: ', instrument.volume.volume.value);
 };
