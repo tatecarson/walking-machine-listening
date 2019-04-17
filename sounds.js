@@ -132,14 +132,14 @@ NOTES.forEach(note => {
 
 const soundTypes = {
   geo: ['wind', 'other-weather', 'rain'],
-  bio: ['insects', 'birds', 'large-animal'],
+  // footsteps are in bio so that when walking one can hear the nature
+  bio: ['insects', 'birds', 'large-animal',   'footsteps'],
   anthro: [
     'cars',
     'construction',
     'human-speech',
     'AC',
-    'airplanes',
-    'footsteps',
+    'airplanes'
   ],
 };
 
@@ -182,11 +182,11 @@ const soundUpdates = () => {
       // remove NaNs
       if (!_.isNaN(avg)) {
         instrument.volume.volume.setTargetAtTime(
-          map(avg, 0, 24, -20, -3),
+          map(avg, 0, 24, -22, -10),
           Tone.now(),
           1
         );
-        // TODO: add in changes to FM synth that respond to wind
+
         const modIndex = map(avg, 0, 24, 4, 8);
         instrument.piano.modulationIndex.setTargetAtTime(
           modIndex,
