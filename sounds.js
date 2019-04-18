@@ -55,11 +55,6 @@ const magicChord = [
   tuning.G,
   tuning.A,
 ];
-const NOTES = Tonal.Array.rotate(1, magicChord).reduce(
-  (withOctaves, note) =>
-    withOctaves.concat(OCTAVES.map(octave => `${note}${octave}`)),
-  []
-);
 
 const instrumentInit = () => {
   let volume = new Tone.Volume(-6);
@@ -113,6 +108,21 @@ const instrumentInit = () => {
       delay = null;
     }
   };
+
+  const NOTES = Tonal.Array.rotate(1, magicChord).reduce(
+    (withOctaves, note) =>
+      withOctaves.concat(OCTAVES.map(octave => `${note}${octave}`)),
+    []
+  );
+
+  NOTES.forEach(note => {
+    const interval = _.random(MIN_REPEAT_S, MAX_REPEAT_S);
+    const startTime = _.random(0, MAX_REPEAT_S - MIN_REPEAT_S);
+    const start = _.random(0.6, 3);
+    const playNote = () => instrument.piano.triggerAttack(note, `+${start}`);
+    Tone.Transport.scheduleRepeat(playNote, interval, `+${startTime}`);
+  });
+
   return {
     piano,
     volume,
@@ -121,14 +131,6 @@ const instrumentInit = () => {
     dispose,
   };
 };
-
-NOTES.forEach(note => {
-  const interval = _.random(MIN_REPEAT_S, MAX_REPEAT_S);
-  const delay = _.random(0, MAX_REPEAT_S - MIN_REPEAT_S);
-  const start = _.random(0.6, 3);
-  const playNote = () => instrument.piano.triggerAttack(note, `+${start}`);
-  Tone.Transport.scheduleRepeat(playNote, interval, `+${delay}`);
-});
 
 const soundTypes = {
   geo: ['wind', 'other-weather', 'rain'],
@@ -200,11 +202,10 @@ const soundUpdates = () => {
   } else if (bioFlag) {
     // if -60 it will dispose so keep it above that
     instrument.volume.volume.setTargetAtTime(-59, Tone.now(), 1);
-
     console.count('bio');
     anthroFlag = true;
     geoFlag = true;
     bioFlag = false;
   }
-  console.log('CurrentVolume: ', instrument.volume.volume.value);
+  // console.log('CurrentVolume: ', instrument.volume.volume.value);
 };

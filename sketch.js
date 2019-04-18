@@ -56,9 +56,13 @@ function setup() {
   } else {
     document.getElementById('save-data').style.display = 'none';
   }
+
+  musicToggle = document.getElementById('music-on');
+  // Tone.Transport.start();
 }
 
 function draw() {
+  // console.log(loudness);
   background(255);
   textSize(12);
 
@@ -116,12 +120,20 @@ function draw() {
   text(`total samples: ${totalNumSamples}`, 10, 35 + 20);
 
   if (predictionAlpha > 0) predictionAlpha -= 5;
+}
 
+/**
+ * Using Loop here because requestAnimationFrame pauses when screen is off.
+ * All of the musically important stuff is done in this loop. The drawing components are left above
+ * in the draw loop.
+ */
+const soundLoop = new Tone.Loop(() => {
   /**
    * Start and stop music
    * dispose for better performance
    */
-  musicToggle = document.getElementById('music-on');
+  console.log('repeating');
+
   if (musicToggle.checked && musicToggleFlag) {
     instrument = instrumentInit();
     instrument.volume.volume.rampTo(-3, 4);
@@ -152,5 +164,6 @@ function draw() {
    */
   if (instrument && !_.isNull(instrument.volume.volume)) {
     soundUpdates();
+    guessSound();
   }
-}
+}, '8n').start();

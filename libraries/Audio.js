@@ -67,7 +67,8 @@ MicrophoneInput.prototype.initializeMicrophoneSampling = function() {
       console.log('Setting Meyda Source to Microphone');
       audioObject.meyda.setSource(source);
       audioObject.meyda.start();
-
+      Tone.Transport.start();
+      console.log('Transport ', Tone.Transport.state);
       console.groupEnd();
     };
 
