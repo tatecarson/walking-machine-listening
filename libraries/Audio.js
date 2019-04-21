@@ -36,7 +36,7 @@ const MicrophoneInput = function MicrophoneInput(bufferSize) {
 
 MicrophoneInput.prototype.initializeMicrophoneSampling = function() {
   var errorCallback = function errorCallback (err) { //eslint-disable-line
-    // We should fallback to an audio file here, but that's difficult on mobile
+    // fallback to recorded file for testing
     if (!md.mobile()) {
       const recordedWalk = document.querySelector('audio');
       console.log(recordedWalk);
