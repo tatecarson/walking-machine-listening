@@ -1,5 +1,3 @@
-// TODO: check on androids
-
 const md = new MobileDetect(window.navigator.userAgent);
 
 // only add test file if on desktop
@@ -7,7 +5,7 @@ const md = new MobileDetect(window.navigator.userAgent);
 if (screen.width > 450) {
   document.getElementById('recorded-walk').innerHTML = `
   <audio controls crossorigin="anonymous" id="recorded-walk">
-    <source src="walking4-21-19.wav" type="audio/wav">
+    <source src="walking4-21-19.mp3" type="audio/mp3">
     <p>Browser too old to support HTML5 audio? How depressing!</p>
   </audio>
   `;
