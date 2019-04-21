@@ -127,6 +127,8 @@ function draw() {
  * All of the musically important stuff is done in this loop. The drawing components are left above
  * in the draw loop.
  */
+// FIXME: this is still not predictably working all the time,
+// check it when you get the chance.
 const soundLoop = new Tone.Loop(() => {
   /**
    * Start and stop music
@@ -142,7 +144,6 @@ const soundLoop = new Tone.Loop(() => {
     musicToggleFlag = false;
   } else if (!musicToggle.checked && !musicToggleFlag) {
     Tone.Transport.stop();
-
     // fade out then dispose so no clicks
     instrument.volume.volume.rampTo(-60, 5);
     musicToggleFlag = true;

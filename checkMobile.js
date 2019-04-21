@@ -6,8 +6,8 @@ const md = new MobileDetect(window.navigator.userAgent);
 // eslint-disable-next-line no-restricted-globals
 if (screen.width > 450) {
   document.getElementById('recorded-walk').innerHTML = `
-  <audio controls loop crossorigin="anonymous" id="recorded-walk">
-    <source src="walking4-15-19.mp3" type="audio/mp3">
+  <audio controls crossorigin="anonymous" id="recorded-walk">
+    <source src="walking4-21-19.wav" type="audio/wav">
     <p>Browser too old to support HTML5 audio? How depressing!</p>
   </audio>
   `;

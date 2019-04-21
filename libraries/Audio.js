@@ -38,12 +38,14 @@ MicrophoneInput.prototype.initializeMicrophoneSampling = function() {
   var errorCallback = function errorCallback (err) { //eslint-disable-line
     // We should fallback to an audio file here, but that's difficult on mobile
     if (!md.mobile()) {
-      // document.getElementById('recorded-walk').style.display = 'none';
-      const recordedWalk = document.getElementById('recorded-walk');
+      const recordedWalk = document.querySelector('audio');
+      console.log(recordedWalk);
       const stream = audioObject.context.createMediaElementSource(recordedWalk);
       stream.connect(audioObject.context.destination);
       audioObject.meyda.setSource(stream);
       audioObject.meyda.start();
+      Tone.Transport.start();
+      console.log('Transport ', Tone.Transport.state);
     }
     console.log('at error');
   };
