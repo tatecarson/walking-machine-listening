@@ -120,6 +120,13 @@ function draw() {
   text(`total samples: ${totalNumSamples}`, 10, 35 + 20);
 
   if (predictionAlpha > 0) predictionAlpha -= 5;
+
+  // do Transport manipulation here because draw loop never stops
+  if (musicToggle.checked && musicToggleFlag) {
+    Tone.Transport.start();
+  } else if (!musicToggle.checked && !musicToggleFlag) {
+    Tone.Transport.stop();
+  }
 }
 
 /**
@@ -127,8 +134,6 @@ function draw() {
  * All of the musically important stuff is done in this loop. The drawing components are left above
  * in the draw loop.
  */
-// FIXME: this is still not predictably working all the time,
-// check it when you get the chance.
 const soundLoop = new Tone.Loop(() => {
   /**
    * Start and stop music
@@ -139,11 +144,9 @@ const soundLoop = new Tone.Loop(() => {
   if (musicToggle.checked && musicToggleFlag) {
     instrument = instrumentInit();
     instrument.volume.volume.rampTo(-3, 4);
-    Tone.Transport.start();
 
     musicToggleFlag = false;
   } else if (!musicToggle.checked && !musicToggleFlag) {
-    Tone.Transport.stop();
     // fade out then dispose so no clicks
     instrument.volume.volume.rampTo(-60, 5);
     musicToggleFlag = true;
