@@ -139,8 +139,6 @@ const soundLoop = new Tone.Loop(() => {
    * Start and stop music
    * dispose for better performance
    */
-  console.log('repeating');
-
   if (musicToggle.checked && musicToggleFlag) {
     instrument = instrumentInit();
     instrument.volume.volume.rampTo(-3, 4);
