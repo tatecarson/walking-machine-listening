@@ -5,10 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-  <title>Walking</title>
+  <title>Sounds Aware</title>
   <link rel="stylesheet" href="libraries/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-
+  <script src="https://kit.fontawesome.com/84f269f599.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.3/mobile-detect.min.js"></script>
   <script src="https://unpkg.com/startaudiocontext"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
@@ -36,120 +36,137 @@
 
 <body>
   <section class="section">
-    <!-- .currentTime = time to set loop start -->
-    <div id="recorded-walk"></div>
-    <div class="container">
-      <h1 class="title">
-        Listen to your world
-      </h1>
-      <p class="subtitle">
-        Categorize the sounds you find and record them.
-      </p>
-      <div class="columns is-mobile">
 
-        <div class="column">
+    <h1 class="title">
+      Sounds Aware
+    </h1>
+    <div id="root">
 
-          <div class="select">
-            <select id="label">
-              <!-- biophony - insects, birds, larger animals -->
-              <!-- geophony - water, wind, weather -->
-              <!-- anthrophony - people talking, cars/trucks, air conditioning, airplanes, construction -->
-              <option value="">--Select a label--</option>
-              <option value="cars">
-                cars
-              </option>
-              <option value="construction">
-                construction
-              </option>
-              <option value="human-speech">
-                human-speech
-              </option>
-              <option value="AC">
-                AC
-              </option>
-              <option value="airplanes">
-                airplanes
-              </option>
-              <option value="footsteps">
-                footsteps
-              </option>
-              <option value="rain">
-                rain
-              </option>
-              <option value="wind">
-                wind
-              </option>
-              <option value="other-weather">
-                other-weather
-              </option>
-              <option value="insects">
-                insects
-              </option>
-              <option value="birds">
-                birds
-              </option>
-              <option value="large-animal">
-                large-animal
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="column">
-          <div class="field is-grouped">
+      <tabs>
+        <tab name="About" :selected="true">
+          <section class="section">
 
-            <input id="music-on" type="checkbox" name="music" class="switch is-large">
-            <label for="music-on">Music</label>
-          </div>
-        </div>
-      </div>
+            <div class="column">
+              <div class="field is-grouped">
 
+                <input id="music-on" type="checkbox" name="music" class="switch is-large">
+                <label for="music-on">Music</label>
+              </div>
+            </div>
+          </section>
+        </tab>
 
+        <tab name="Learn Sounds">
+          <!-- .currentTime = time to set loop start -->
+          <div id="recorded-walk"></div>
+          <!-- <div class="container"> -->
+          <p class="subtitle">
+            Categorize the sounds you find and record them.
+          </p>
+          <div class="columns is-mobile">
+            <div class="column">
+              <div class="select">
+                <select id="label">
+                  <!-- biophony - insects, birds, larger animals -->
+                  <!-- geophony - water, wind, weather -->
+                  <!-- anthrophony - people talking, cars/trucks, air conditioning, airplanes, construction -->
+                  <option value="">--Select a label--</option>
+                  <option value="cars">
+                    cars
+                  </option>
+                  <option value="construction">
+                    construction
+                  </option>
+                  <option value="human-speech">
+                    human-speech
+                  </option>
+                  <option value="AC">
+                    AC
+                  </option>
+                  <option value="airplanes">
+                    airplanes
+                  </option>
+                  <option value="footsteps">
+                    footsteps
+                  </option>
+                  <option value="rain">
+                    rain
+                  </option>
+                  <option value="wind">
+                    wind
+                  </option>
+                  <option value="other-weather">
+                    other-weather
+                  </option>
+                  <option value="insects">
+                    insects
+                  </option>
+                  <option value="birds">
+                    birds
+                  </option>
+                  <option value="large-animal">
+                    large-animal
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="column">
+              <div class="field is-grouped">
 
-
-
-      <div class="container">
-        <div id="sketchHolder"></div>
-      </div>
-      <div class="container">
-        <p>
-          Listening sensitivity
-        </p>
-        <input class="slider" step="0" min="0" max="25" value="10" type="range">
-
-      </div>
-
-      <div class="columns is-mobile">
-        <div class="column">
-          <div class="field is-grouped">
-
-            <input id="record-data" type="checkbox" name="record" class="switch is-large">
-            <label for="record-data">Record </label>
-          </div>
-        </div>
-        <div class="column">
-          <div class="control">
-            <button class="button is-link" onclick="forgetPreviousRecording()">Forget last recording</button>
-          </div>
-        </div>
+                <input id="record-data" type="checkbox" name="record" class="switch is-large">
+                <label for="record-data">Record </label>
+              </div>
+            </div>
 
 
-      </div>
-      <div class="columns is-mobile">
-        <div class="column">
-          <div class="control" id="save-data">
-            <button class="button is-link is-medium" onclick="saveData()">Save All Recordings</button>
           </div>
 
-        </div>
-        <div class="column" id="save-success">
-          <div class="notification is-success">
-            <button class="delete"></button>
-            Success!
+
+          <div class="container">
+            <p>
+              Listening sensitivity
+            </p>
+            <input class="slider" step="0" min="0" max="25" value="10" type="range">
 
           </div>
-        </div>
-      </div>
+
+
+          <div class="container">
+            <div id="sketchHolder"></div>
+          </div>
+
+          <div class="columns is-mobile">
+
+            <div class="column">
+              <div class="control">
+                <button class="button is-link" onclick="forgetPreviousRecording()">Forget last recording</button>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="columns is-mobile">
+            <div class="column">
+              <div class="control" id="save-data">
+                <button class="button is-link is-medium" onclick="saveData()">Save All Recordings</button>
+              </div>
+
+            </div>
+            <div class="column" id="save-success">
+              <div class="notification is-success">
+                <button class="delete"></button>
+                Success!
+
+              </div>
+            </div>
+          </div>
+        </tab>
+
+      </tabs>
+
+    </div>
   </section>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
@@ -163,6 +180,8 @@
   </script>
   <!-- after page has loaded? -->
   <script src="checkMobile.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js'></script>
+  <script src="tabs.js"></script>
 
 </body>
 
