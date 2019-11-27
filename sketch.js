@@ -32,7 +32,7 @@ let data;
 let select;
 let trainingSpeed;
 
-let musicToggle = {};
+const musicToggle = {};
 let musicToggleFlag = true;
 let playButton;
 let instrument;
@@ -60,16 +60,16 @@ function setup() {
   }
 
   playButton = document.getElementById('play-pause-button');
-  playButton.addEventListener("click", () => {
-    musicToggle.checked = !musicToggle.checked
-    console.log(musicToggle.checked)
-  })
+  playButton.addEventListener('click', () => {
+    musicToggle.checked = !musicToggle.checked;
+    console.log(musicToggle.checked);
+  });
   // Tone.Transport.start();
 }
 
 function draw() {
   // console.log(loudness);
-  background(255);
+  background(219, 211, 164);
   textSize(12);
 
   /**
@@ -115,12 +115,12 @@ function draw() {
   }
 
   noStroke();
-  fill(0, 255, 0, predictionAlpha);
+  fill(63, 97, 72, predictionAlpha);
   textSize(50);
   text(soundGuess, 10, 150);
 
   noStroke();
-  fill(0);
+  fill(2, 2, 4);
   textSize(12);
   text(`loudness threshold: ${floor(loudnessSlider.value)}`, 10, 35);
   text(`total samples: ${totalNumSamples}`, 10, 35 + 20);

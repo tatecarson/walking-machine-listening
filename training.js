@@ -8,9 +8,9 @@ function trainSound() {
     totalNumSamples++;
     currentNumSamples++;
     console.log(currentNumSamples);
-    fill(255, 0, 0);
+    // fill(255, 0, 0);
     noStroke();
-    ellipse(width - 400, 35, 25, 25);
+    // ellipse(width - 400, 35, 25, 25);
 
     singleTrigger = false;
     startTime = millis();
