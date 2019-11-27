@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
   <title>Sounds Aware</title>
-  <link rel="stylesheet" href="libraries/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+  <link rel="stylesheet" type="text/css" href="libraries/style.css">
   <script src="https://kit.fontawesome.com/84f269f599.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.3/mobile-detect.min.js"></script>
   <script src="https://unpkg.com/startaudiocontext"></script>
@@ -45,9 +45,6 @@
           </h1>
         </div>
         <div class="column">
-          <!-- TODO: reverse the play and pause -->
-          <!-- <input id="music-on" type="checkbox" name="music" class="switch is-large">
-          <label for="music-on"></label> -->
           <a id="play-pause-button" class="fa fa-play"></a>
 
         </div>
@@ -58,13 +55,29 @@
       <tabs>
         <tab name="About" :selected="true">
           <section class="section">
-            <p>some text about sounds aware</p>
+            <div class="container">
+              <p>
+                Sounds Aware is a web application that uses machine learning to detect human-made
+                sound (anthrophony) and masks it with ambient music as
+                you walk around your environment.
+              </p>
+              <br>
+              <p>
+                To start using just click the play button above. Sounds Aware will respond with pre-trained
+                environmental sound tags. If the app senses less anthrophony and more
+                biophony or geophony, then the music fades away, hopefully shifting your attention to all of the non human-made sounds around you.
+              </p>
+              <br>
+              <p>
+                If you find that the app is not accurately responding to the anthrophonic sounds you can add your
+                own tags in the 'Tag sounds' tab.
+              </p>
+            </div>
 
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat facilis dolores ullam, consequatur pariatur sequi deserunt, perferendis natus minima ipsa laboriosam! Consectetur quas enim unde sit esse error deserunt facere.
           </section>
         </tab>
 
-        <tab name="Learn Sounds">
+        <tab name="Tag Sounds">
           <!-- .currentTime = time to set loop start -->
           <div id="recorded-walk"></div>
           <!-- <div class="container"> -->
