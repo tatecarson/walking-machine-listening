@@ -1001,3 +1001,8 @@ input[type=range]:focus::-ms-fill-upper {
 #save-success {
   display: none
 }
+
+#play-pause-button {
+  font-size: 50px;
+  cursor: pointer;
+}

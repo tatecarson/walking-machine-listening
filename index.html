@@ -36,23 +36,31 @@
 
 <body>
   <section class="section">
+    <div class="column">
+      <div class="columns is-mobile is-centered">
 
-    <h1 class="title">
-      Sounds Aware
-    </h1>
+        <div class="column is-two-thirds">
+          <h1 class="title">
+            Sounds Aware
+          </h1>
+        </div>
+        <div class="column">
+          <!-- TODO: reverse the play and pause -->
+          <!-- <input id="music-on" type="checkbox" name="music" class="switch is-large">
+          <label for="music-on"></label> -->
+          <a id="play-pause-button" class="fa fa-play"></a>
+
+        </div>
+      </div>
+    </div>
     <div id="root">
 
       <tabs>
         <tab name="About" :selected="true">
           <section class="section">
+            <p>some text about sounds aware</p>
 
-            <div class="column">
-              <div class="field is-grouped">
-
-                <input id="music-on" type="checkbox" name="music" class="switch is-large">
-                <label for="music-on">Music</label>
-              </div>
-            </div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat facilis dolores ullam, consequatur pariatur sequi deserunt, perferendis natus minima ipsa laboriosam! Consectetur quas enim unde sit esse error deserunt facere.
           </section>
         </tab>
 
@@ -143,7 +151,6 @@
               </div>
             </div>
 
-
           </div>
           <div class="columns is-mobile">
             <div class="column">
@@ -176,6 +183,12 @@
           document.getElementById('save-success').style.display = 'none'
         });
       });
+      const playButton = document.getElementById('play-pause-button')
+      playButton.addEventListener('click', e => {
+        // console.log(e)
+        playButton.classList.toggle('fa-play')
+        playButton.classList.toggle('fa-pause')
+      })
     });
   </script>
   <!-- after page has loaded? -->

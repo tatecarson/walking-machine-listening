@@ -32,8 +32,9 @@ let data;
 let select;
 let trainingSpeed;
 
-let musicToggle;
+let musicToggle = {};
 let musicToggleFlag = true;
+let playButton;
 let instrument;
 
 function preload() {
@@ -48,6 +49,7 @@ function setup() {
   audio = new MicrophoneInput(512);
   startTime = millis();
 
+  musicToggle.checked = false;
   // test for user or trainer
   // to train go to walking.netlify.com/#train
   // eslint-disable-next-line no-restricted-globals
@@ -57,7 +59,11 @@ function setup() {
     document.getElementById('save-data').style.display = 'none';
   }
 
-  musicToggle = document.getElementById('music-on');
+  playButton = document.getElementById('play-pause-button');
+  playButton.addEventListener("click", () => {
+    musicToggle.checked = !musicToggle.checked
+    console.log(musicToggle.checked)
+  })
   // Tone.Transport.start();
 }
 
