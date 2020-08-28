@@ -1,12 +1,13 @@
 // Initialize Firebase
 function fb() {
   const config = {
-    apiKey: 'AIzaSyC--0WCUJ3d5dfTlwAOw3U5p632TU-UqmM',
-    authDomain: 'walking-6dd4b.firebaseapp.com',
-    databaseURL: 'https://walking-6dd4b.firebaseio.com',
-    projectId: 'walking-6dd4b',
-    storageBucket: 'walking-6dd4b.appspot.com',
-    messagingSenderId: '67753631072',
+    apiKey: "AIzaSyAUEtLAmlw_UgLwq8GkwN__0rslE4YYCo4",
+    authDomain: "sounds-aware.firebaseapp.com",
+    databaseURL: "https://sounds-aware.firebaseio.com",
+    projectId: "sounds-aware",
+    storageBucket: "sounds-aware.appspot.com",
+    messagingSenderId: "21783369081",
+    appId: "1:21783369081:web:6d5499806f2c92b5e8cba8"
   };
   firebase.initializeApp(config);
   db = firebase.firestore();
@@ -17,7 +18,7 @@ function fb() {
       if (doc.exists) {
         console.log('Document data:', doc.data());
         data = doc.data();
-      machine = new kNear(k, data.soundData) // eslint-disable-line
+        machine = new kNear(k, data.soundData) // eslint-disable-line
       } else {
         // doc.data() will be undefined in this case
         console.log('No such document!');
